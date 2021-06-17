@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/app.css">
+    <script>
+        // Permite almacenar datos en el navegador u obtener información almacenada
+        let logged = localStorage.getItem("logged");
+        // VALIDAR SI HAY SESIÓN INICIADA
+        if (logged == 1) {
+            console.log("Sesión detectada...");
+        } else {
+            window.location = "index.html";
+        }
+    </script>
+</head>
+<body>    
+    <div class="container"> 
+        <h1>PÁGINA PRINCIPAL</h1>  
+        <a href="#" class="btn" id="cerrarSesion">Cerrar sesión</a>     
+        <hr>
+        
+        <div class="card">
+            <input type="text" class="form-control" id="txtMensaje" placeholder="Escribe un mensaje" />
+            <input type="text" class="form-control" id="txtImagen" placeholder="Ingresa la URL de una imagen" />
+
+            <input type="button" value="Publicar" id="btnPublicar" />
+        </div>
+        
+        <div id="publicaciones"></div>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $("#cerrarSesion").click(function(){
+            localStorage.clear();
+            window.location = "index.html";
+        });
+
+        $("#btnPublicar").click(function(){
+            let mensaje = $("#txtMensaje").val();
+            let imagen = $("#txtImagen").val();
+            
+            let template = "<div class='card'>" + mensaje;
+            template += "<img src='" + imagen + "'>";
+            template += "</div>";
+            
+            $("#publicaciones").append(template);
+        });
+    </script>
+</body>
+</html>
